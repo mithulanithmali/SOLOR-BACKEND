@@ -1,12 +1,14 @@
 package com.erp.solar.common;
 
+import java.io.Serializable;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public abstract class Account {
+public abstract class Account{
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)

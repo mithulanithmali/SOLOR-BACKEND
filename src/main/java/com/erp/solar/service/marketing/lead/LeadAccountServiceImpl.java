@@ -17,4 +17,9 @@ public class LeadAccountServiceImpl implements LeadAccountService{
 		return leadRepo.save(leadAccount);
 	}
 
+	@Override
+	public Lead updateLead(Lead lead) {		
+		return leadRepo.save(lead);
+	}
+
 }

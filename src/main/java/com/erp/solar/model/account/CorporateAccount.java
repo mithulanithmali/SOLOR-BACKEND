@@ -1,13 +1,22 @@
 package com.erp.solar.model.account;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.erp.solar.common.Account;
+import com.erp.solar.model.lead.activities.ActivityTask;
+import com.erp.solar.model.lead.activities.Appointment;
+import com.erp.solar.model.lead.activities.Email;
+import com.erp.solar.model.lead.activities.NewPhoneCall;
 import com.erp.solar.model.marketing.lead.Lead;
+import com.erp.solar.model.newbusiness.lead.NewBusinessLead;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 
@@ -34,9 +43,25 @@ public class CorporateAccount extends Account {
 	private String email_main_contact;
 	private String method_of_main_contact;
 	
-	@OneToOne(fetch = FetchType.LAZY , cascade = CascadeType.ALL , mappedBy="corporateAccount")
-	private Lead lead;
+//	@OneToMany(fetch = FetchType.EAGER , cascade = CascadeType.ALL , mappedBy="corporateAccount")
+//	@JsonManagedReference
+//	private Set<Lead> lead;
 	
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.EAGER , cascade = CascadeType.ALL , mappedBy="corporateAccount")
+	private Set<NewBusinessLead> newBusinessLead;
+	
+	@OneToMany(fetch = FetchType.EAGER , cascade = CascadeType.ALL, mappedBy="corporateAccount")
+	private Set<Appointment> appointment;
+	
+	@OneToMany(fetch = FetchType.EAGER , cascade = CascadeType.ALL, mappedBy="corporateAccount")
+	private Set<NewPhoneCall> newPhoneCall;
+	
+	@OneToMany(fetch = FetchType.EAGER , cascade = CascadeType.ALL, mappedBy="corporateAccount")
+	private Set<Email> email;
+	
+	@OneToMany(fetch = FetchType.EAGER , cascade = CascadeType.ALL, mappedBy="corporateAccount")
+	private Set<ActivityTask> activityTask;
 	
 	public CorporateAccount() {
 		super();
@@ -222,16 +247,63 @@ public class CorporateAccount extends Account {
 		this.method_of_main_contact = method_of_main_contact;
 	}
 
+//	public Set<Lead> getLead() {
+//		return lead;
+//	}
+//
+//
+//	public void setLead(Set<Lead> lead) {
+//		this.lead = lead;
+//	}
 
-	public Lead getLead() {
-		return lead;
+
+	public Set<NewBusinessLead> getNewBusinessLead() {
+		return newBusinessLead;
 	}
 
 
-	public void setLead(Lead lead) {
-		this.lead = lead;
+	public void setNewBusinessLead(Set<NewBusinessLead> newBusinessLead) {
+		this.newBusinessLead = newBusinessLead;
 	}
 
-	
+
+	public Set<Appointment> getAppointment() {
+		return appointment;
+	}
+
+
+	public void setAppointment(Set<Appointment> appointment) {
+		this.appointment = appointment;
+	}
+
+
+	public Set<NewPhoneCall> getNewPhoneCall() {
+		return newPhoneCall;
+	}
+
+
+	public void setNewPhoneCall(Set<NewPhoneCall> newPhoneCall) {
+		this.newPhoneCall = newPhoneCall;
+	}
+
+
+	public Set<Email> getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(Set<Email> email) {
+		this.email = email;
+	}
+
+
+	public Set<ActivityTask> getActivityTask() {
+		return activityTask;
+	}
+
+
+	public void setActivityTask(Set<ActivityTask> activityTask) {
+		this.activityTask = activityTask;
+	}		
 	
 }
